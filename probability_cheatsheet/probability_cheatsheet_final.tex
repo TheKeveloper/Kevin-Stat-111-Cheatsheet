@@ -51,12 +51,15 @@
 \newcommand{\bias}{\textrm{Bias}}
 \newcommand{\asim}{\,\dot\sim\,}
 \newcommand{\todist}{\xrightarrow{D}}
-\newcommand{\I}{\mathbb{I}}
+\newcommand{\MOM}{\textrm{MOM}}
+\newcommand{\simiid}{\overset{\textnormal{i.i.d.}}{\sim}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\stu}{\textrm{t}}
 \renewcommand\vec{\mathbf}
 \newcommand{\hide}[1]{}
 
 
-\geometry{top=.15in,left=.2in,right=.2in,bottom=.0in,includehead}
+\geometry{top=.1in,left=.15in,right=.15in,bottom=0in,includehead}
 
 \pagestyle{empty}
 \makeatletter
@@ -692,6 +695,8 @@ This gives transition matrix $Q$ with $q_{ij}=p_{ij}a_{ij}$ if $i\neq j$, and $q
     \item \textbf{Gamma and Beta Integrals}
     $ \int_0^\infty x^{t-1}e^{-x}\, dx = \Gamma(t) \hspace{1 cm} \int_0^1 x^{a - 1}(1-x)^{b-1}\, dx = \frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b)}$
     Also, $\Gamma(a+1) = a \Gamma(a)$, and $\Gamma(n) = (n - 1)!$ if $n$ is a positive integer. 
+    \item $\sum_n (X_j - \bar X)(Y_j - \bar Y) = \sum_n X_jY_j - n\bar X \bar Y$
+    \item $nE(\bar X \bar Y) = \frac{1}{n}\sum_{i,j}E(X_iY_i) = \frac{1}{n}(nE(X_1Y_1) + n(n-1)E(X_1Y_2))$
 \end{enumerate}
 
 \section{STAT 111 Stuff} \hrule height 1pt
@@ -839,6 +844,43 @@ If $Y$ is in NEF form (e.g. Normal ($\sigma^2$ known), Poisson, Binomial (n fixe
     \item Normal: $\hat \mu = \bar Y$. $\hat \sigma^2 = \frac{1}{n} \sum (y_i - \bar Y)^2$
     \item Weibull: $\hat \lambda|\gamma = \frac{1}{n}\sum y_i^\gamma$
 \end{itemize}
+
+\subsection{Student-t Distribution}
+Let $T = \frac{E}{\sqrt{V/n}}$ where $Z \sim \N(0, 1)$ and $V \sim \chi_n^2$ (remember, special case of Gamma) where $Z \independent V$, then $T \sim \stu_n$ (where $n$ is called the \# of degrees of freedom). If $n = 1$, then $T \sim \textnormal{Cauchy}$. Can find mean, variance, in your head by remembering it's a sum of standard Normals.
+
+\textbf{Also:} For $Z_1,\dots,Z_n\simiid \N(0,1)$, we can find using JFI that $\sum_{j=1}^n (Z_j-\bar{Z_n})^2\sim \chi^2_{n-1}$.
+
+\subsection{Canonical Examples}
+\subsubsection{MLE for Normal with Both Unknown}
+By applying JFI, see that the MLE $\hat\mu=\bar{X}$ does not depend on $\sigma^2$. Plug in so the second term from JFI drops out. Set $t=\sum_{j=1}^n (x_j-\overline{x_n})^2$ (it is a constant of the data), take the derivative and find $\hat\sigma^2=\frac{t}{n}$.
+\subsubsection{House Radiation Levels (Neymann-Scott)}
+Suppose $\mu_i$ be the radiation level at home $i$ and that $Y_{i1},Y_{i2}\sim\N(\mu_i,\sigma^2)$, all parameters unknown, and all independent. \hide{Then we can write the likelihood function using 1) the algebra trick that $(x_1-\bar{x})^2+(x_2-\bar{x}^2)=\frac{1}{2}(x_1-x_2)^2$ (realizing that $a=x_1-\bar{x}=x_2-\bar{x}$ and then $2a^2=\frac{1}{2}(2a)^2$), and then 2) applying  JFI, so:}
+\begin{align*}
+L(\mu_1,\dots,\mu_n,\sigma^2	;\vec{y})&=\frac{1}{\sigma^{2n}}e^{\left(-\frac{1}{4\sigma^2}\sum_{j=1}^n(y_{j1}-y_{j2})^2-\frac{1}{\sigma^2}\sum_{j=1}^n (\bar{y_j}-\mu_j)\right)}
+\end{align*}
+(Solving for MLE) First stage: By inspection, we find that the MLEs are $\hat\mu_j=\overline{y_j}$. Second stage: set $\mu_j$'s above equal to the MLEs, and \textit{then} take the derivative to find $\hat\sigma_2=\frac{1}{4n}\sum_{j=1}^n (y_{j1}-y_{j2})^2$.
+
+(Biasedness) $Y_{j1}-Y_{j2}\sim\N(0,2\sigma^2)$. $E\hat\sigma^2=\frac{2n\sigma^2}{4n}=\frac{\sigma^2}{2}$. Severe bias! Notice the MLE is off by factor by 2. Could \textbf{propose} a new estimator by multiplying by 2.
+
+\hide{
+(Why) Have to be careful. We have independent Normals, so surprising that it would be pathological. Reason: because of many $\mu_i$'s, the dimension of parameter space grows as the sample size grows (a regularity condition is not met for MLE).}
+\subsubsection{German Tank Problem}
+Model: Tank serial \#'s $1,2,\dots,t$, estimand $t$. Data: $n$ serial \#'s $y_1,\dots,y_n$. Simple random sample.
+\begin{align*}
+L(t)&=\begin{cases}
+\frac{1}{\binom{t}{n}}; y_1,\dots,y_n\in\{1,\dots, t\} \\
+0 \text{ otherwise}
+\end{cases}	\\
+&=\frac{1}{\binom{t}{n}}I(t\geq M)
+\end{align*}
+with $M=\max(y_1,\dots,y_n)$. By inspection, MLE is found to be $\hat t=M$. By the naive def'n of probability, we have:
+\begin{align*}
+P(M=m)&=\frac{\binom{m-1}{n-1}}{\binom{t}{n}} \\
+EM&=\sum_{m=n}^t \frac{m\binom{m-1}{n-1}}{\binom{t}{n}}=\frac{n}{n+1}(t+1)\text{ by Feynman Stat 110 HW}
+\end{align*}
+We can \textit{propose} a new estimator by fixing the bias, so let $\hat t=\frac{n+1}{n}M-1$ by algebra.
+
+We can find the MOM: $E(Y_j)=\frac{1}{t}\sum_{i=1}^t i=\frac{t+1}{2}$. So $\hat t_{\text{MOM}}=2\bar{y}-1$.
 
 \end{multicols*}
 
