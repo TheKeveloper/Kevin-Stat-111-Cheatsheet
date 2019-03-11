@@ -97,6 +97,10 @@
 \titleformat{\subsection}
 {\color{awesome}\normalfont\normalsize\bfseries}
 {\color{awesome}\thesection}{1em}{}
+
+\titleformat{\subsubsection}
+{\color{violet}\normalfont\small\bfseries}
+{\color{violet}\thesection}{1em}{}
 % Comment out the above 5 lines for black and white
 \begin{document}
 
@@ -131,13 +135,12 @@
 %%% BEGIN CHEATSHEET
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{STAT 111 Distributions}\hrule height 1pt \smallskip
 \subsection{Universality of Uniform (UoU)} When you plug any CRV into its own CDF, you get a $\Unif(0,1)$ random variable. When you plug a $\Unif(0,1)$ r.v.~into an inverse CDF, you get an r.v.~with that CDF. For example, let's say that a random variable $X$ has CDF
     \[ F(x) = 1 - e^{-x}, \textrm{ for $x>0$} \]
     By  UoU, if we plug $X$ into this function then we get a uniformly distributed random variable.
     \[ F(X) = 1 - e^{-X} \sim \textrm{Unif}(0,1)\]
     Similarly, if $U \sim \textrm{Unif}(0,1)$ then $F^{-1}(U)$ has CDF $F$. The key point is that {for any continuous random variable $X$, we can transform it into a Uniform random variable and back by using its CDF.}
-\section{Discrete Distributions}\hrule height 1pt \smallskip
-
 
 \subsection{Binomial Distribution} Let $X \sim \Bin(n,p), Y \sim \Bin(m,p)$ with $X \independent Y$.
 \begin{itemize}
@@ -160,7 +163,7 @@ Let $X \sim \Pois(\lambda_1)$ and $Y \sim \Pois(\lambda_2)$, with $X \independen
     \item \textbf{Conditional} $X | (X + Y = n) \sim \Bin\left(n, \frac{\lambda_1}{\lambda_1 + \lambda_2}\right)$
     \item \textbf{Chicken-egg} If there are $Z \sim \Pois(\lambda)$ items and we randomly and independently ``accept" each item with probability $p$, then the number of accepted items $Z_1 \sim \Pois(\lambda p)$, and the number of rejected items $Z_2 \sim \Pois(\lambda (1-p))$, and $Z_1 \independent Z_2$.
 \end{itemize}
-\section{Continuous Distributions}
+\hide{\section{Continuous Distributions}}
 \begin{comment}
 \subsection{Uniform Distribution} . \begin{itemize}
 \item Let $U\sim\Unif(a,b)$ and $(c,d)$ be a subinterval of $(a,b)$. Then $U|U\in (c,d) \sim \Unif(c,d)$.
@@ -259,7 +262,7 @@ Let us say that $X$ is distributed $\chi^2_n$. We know the following:
 \[X \sim \Gam(n/2,1/2)\]
 \end{description}
 
-\section{Multivariate Distributions} \hrule height 1pt \smallskip
+\hide{\section{Multivariate Distributions} \hrule height 1pt \smallskip}
 
 
 \subsection{Multinomial Distribution}
@@ -298,7 +301,7 @@ with $\tau = \sqrt{1-\rho^2}.$
 \end{itemize}
 \end{description}
 
-\section{Distribution Properties} \hrule height 1pt \smallskip
+\hide{\section{Distribution Properties} \hrule height 1pt \smallskip}
 \subsection{Important CDFs}
 \begin{description}
    \item[Standard Normal] $\Phi$
@@ -332,16 +335,15 @@ A convolution of $n$ random variables is simply their sum. For the following res
     \item $\NBin(1, p) \sim \Geom(p)$
 \end{enumerate}
 
-\section{Moments and MGFs}\hrule height 1pt \smallskip
-
-\subsection{Moments}
+\subsection{Moments and MGFs}\smallskip
 \hide{
+\subsubsection{Moments}
 Moments describe the shape of a distribution. Let $X$ have mean $\mu$ and standard deviation $\sigma$, and $Z=(X-\mu)/\sigma$ be the \emph{standardized} version of $X$. The $k$th moment of $X$ is $\mu_k = E(X^k)$ and the $k$th standardized moment of $X$ is $ m_k = E (Z^k)$.}
 
-\subsection{Symmetric Distributions}
+\subsubsection{Moments of Symmetric Distributions}
 A distribution is symmetric around its mean $\mu$ if $X-\mu$ has the same distribution as $\mu-X$. Then for any odd $n$, the $n$th central moment is $E(X-\mu)^n$ if it exists. $X$ is symmetric around $\mu$ if and only if $f(x)=f(2\mu-x)$ for all $x$, if $f$ is the PDF of $X$.
 
-\subsection{Moment Generating Functions}
+\subsubsection{Moment Generating Functions}
 
 \begin{description}
     \item[MGF] For any random variable $X$, the function
@@ -365,7 +367,7 @@ A distribution is symmetric around its mean $\mu$ if $X-\mu$ has the same distri
     The MGF of the sum of two random variables is the product of the MGFs of those two random variables.
 \end{description}
 
-\section{Joint PDFs and CDFs}\hrule height 1pt \smallskip
+\hide{\section{Joint PDFs and CDFs}\hrule height 1pt \smallskip}
 
 \subsection{Joint Distributions}
 The \textbf{joint CDF} of $X$ and $Y$ is 
@@ -392,7 +394,7 @@ To find the distribution of one (or more) random variables from a joint PMF/PDF,
 \textbf{Marginal PDF from joint PDF}
 \[f_X(x) = \int_{-\infty}^\infty f_{X, Y}(x, y) dy\]
 
-
+\hide{
 \subsection{Independence of Random Variables}
 Random variables $X$ and $Y$ are independent if and only if any of the following conditions holds:
 \begin{itemize}
@@ -402,6 +404,7 @@ Random variables $X$ and $Y$ are independent if and only if any of the following
     \item Conditional distribution of $Y$ given $X$ is the marginal distribution of $Y$
 \end{itemize}
  Write $X \independent Y$ to denote that $X$ and $Y$ are independent.
+}
 
 \subsection{Multivariate LOTUS}
 LOTUS in more than one dimension is analogous to the 1D LOTUS.
@@ -410,43 +413,6 @@ For discrete random variables:
 \[E(g(X, Y)) = \sum_x\sum_yg(x, y)P(X=x, Y=y)\]}
 For continuous random variables:
 \[E(g(X, Y)) = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}g(x, y)f_{X,Y}(x, y)dxdy\]
-
-\section{Covariance and Transformations}\hrule height 1pt \smallskip
-
-\subsection{Covariance and Correlation}
-\begin{description}
-\item [Covariance] is the analog of variance for two random variables.
-    \[\cov(X, Y) = E\left((X - E(X))(Y - E(Y))\right) = E(XY) - E(X)E(Y)\]
-    Note that 
-    \[\cov(X, X) = E(X^2) - (E(X))^2 =  \var(X)\]
-\item [Correlation] is a standardized version of covariance that is always between $-1$ and $1$.
-    \[\corr(X, Y) = \frac{\cov(X, Y)}{\sqrt{\var(X)\var(Y)}} \]
-\item [Covariance and Independence] \hide{If two random variables are independent, then they are uncorrelated. The converse is not necessarily true (e.g., consider $X \sim \N(0,1)$ and $Y=X^2$).}
-    \begin{align*}
-    	X \independent Y &\longrightarrow \cov(X, Y) = 0 \longrightarrow E(XY) = E(X)E(Y)
-    \end{align*}
-\item [Covariance and Variance]  The variance of a sum can be found by
-    \begin{align*}
-        \var(X + Y) &= \var(X) + \var(Y) + 2\cov(X, Y) \\
-        \var(X_1 + X_2 + \dots + X_n ) &= \sum_{i = 1}^{n}\var(X_i) + 2\sum_{i < j} \cov(X_i, X_j)
-    \end{align*}
-    If $X$ and $Y$ are independent then they have covariance $0$, so
-    \[X \independent Y \Longrightarrow \var(X + Y) = \var(X) + \var(Y)\]
-    If $X_1, X_2, \dots, X_n$ are identically distributed and have the same covariance relationships (often by \textbf{symmetry}), then 
-    \[\var(X_1 + X_2 + \dots + X_n ) = n\var(X_1) + 2{n \choose 2}\cov(X_1, X_2)\]
-\item [Covariance Properties]  For random variables $W, X, Y, Z$ and constants $a, b$:
-    \begin{align*}
-    	\cov(X, Y) &= \cov(Y, X) \\
-        \cov(X + a, Y + b) &= \cov(X, Y) \\
-        \cov(aX, bY) &= ab\cov(X, Y) \\
-        \cov(W + X, Y + Z) &= \cov(W, Y) + \cov(W, Z) + \cov(X, Y)\\
-        &\quad + \cov(X, Z)
-    \end{align*}
-\item [Correlation is location-invariant and scale-invariant] For any constants $a,b,c,d$ with $a$ and $c$ nonzero,
-    \begin{align*}
-        \corr(aX + b, cY + d) &= \corr(X, Y) 
-    \end{align*}
-\end{description}
 
 \subsection{Transformations}
 \begin{description}
@@ -502,7 +468,44 @@ For example, the numbers of arrivals in the time intervals $[0,5]$, $(5,12),$ an
 Thus we have $T_1 \sim \Expo(\lambda)$. By the memoryless property and similar reasoning, the interarrival times between emails are i.i.d.~$\Expo(\lambda)$, i.e., the differences $T_n - T_{n-1}$ are i.i.d.~$\Expo(\lambda)$.
 \end{description}
 
-\section{Order Statistics}
+\section{Covariance and Transformations}\hrule height 1pt \smallskip
+
+\subsection{Covariance and Correlation}
+\begin{description}
+\item [Covariance] is the analog of variance for two random variables.
+    \[\cov(X, Y) = E\left((X - E(X))(Y - E(Y))\right) = E(XY) - E(X)E(Y)\]
+    Note that 
+    \[\cov(X, X) = E(X^2) - (E(X))^2 =  \var(X)\]
+\item [Correlation] is a standardized version of covariance that is always between $-1$ and $1$.
+    \[\corr(X, Y) = \frac{\cov(X, Y)}{\sqrt{\var(X)\var(Y)}} \]
+\item [Covariance and Independence] \hide{If two random variables are independent, then they are uncorrelated. The converse is not necessarily true (e.g., consider $X \sim \N(0,1)$ and $Y=X^2$).}
+    \begin{align*}
+    	X \independent Y &\longrightarrow \cov(X, Y) = 0 \longrightarrow E(XY) = E(X)E(Y)
+    \end{align*}
+\item [Covariance and Variance]  The variance of a sum can be found by
+    \begin{align*}
+        \var(X + Y) &= \var(X) + \var(Y) + 2\cov(X, Y) \\
+        \var(X_1 + X_2 + \dots + X_n ) &= \sum_{i = 1}^{n}\var(X_i) + 2\sum_{i < j} \cov(X_i, X_j)
+    \end{align*}
+    If $X$ and $Y$ are independent then they have covariance $0$, so
+    \[X \independent Y \Longrightarrow \var(X + Y) = \var(X) + \var(Y)\]
+    If $X_1, X_2, \dots, X_n$ are identically distributed and have the same covariance relationships (often by \textbf{symmetry}), then 
+    \[\var(X_1 + X_2 + \dots + X_n ) = n\var(X_1) + 2{n \choose 2}\cov(X_1, X_2)\]
+\item [Covariance Properties]  For random variables $W, X, Y, Z$ and constants $a, b$:
+    \begin{align*}
+    	\cov(X, Y) &= \cov(Y, X) \\
+        \cov(X + a, Y + b) &= \cov(X, Y) \\
+        \cov(aX, bY) &= ab\cov(X, Y) \\
+        \cov(W + X, Y + Z) &= \cov(W, Y) + \cov(W, Z) + \cov(X, Y)\\
+        &\quad + \cov(X, Z)
+    \end{align*}
+\item [Correlation is location-invariant and scale-invariant] For any constants $a,b,c,d$ with $a$ and $c$ nonzero,
+    \begin{align*}
+        \corr(aX + b, cY + d) &= \corr(X, Y) 
+    \end{align*}
+\end{description}
+
+\subsection{Order Statistics}
 \begin{description}
     \item[Definition] Let's say you have $n$ i.i.d.~r.v.s $X_1, X_2,\dots, X_n$. If you arrange them from smallest to largest, the $i$th element in that list is the $i$th order statistic, denoted $X_{(i)}$. So $X_{(1)}$ is the smallest in the list and $X_{(n)}$ is the largest in the list. \smallskip
     
@@ -514,7 +517,7 @@ Thus we have $T_1 \sim \Expo(\lambda)$. By the memoryless property and similar r
 \end{description}
 
 
-\section{Conditional Expectation}\hrule height 1pt \smallskip
+\subsection{Conditional Expectation} \smallskip
 \begin{description}
     \item[Conditioning on an Event] We can find $E(Y|A)$, the expected value of $Y$ given that event $A$ occurred. A very important case is when $A$ is the event $X=x$. Note that $E(Y|A)$ is a \emph{number}. 
 \end{description}
@@ -623,8 +626,7 @@ A chain is \textbf{reversible} with respect to $\vec{s}$ if $s_iq_{ij} = s_jq_{j
 
 \subsection{Stationary Distribution}
 
-Let us say that the vector $\vec{s} = (s_1, s_2, \dots, s_M)$ be a PMF  (written as a row vector). We will call $\vec{s}$ the \textbf{stationary distribution} for the chain if $\vec{s}Q = \vec{s}$. As a consequence, if $X_t$ has the stationary distribution, then all future $X_{t+1}, X_{t + 2}, \dots$ also have the stationary distribution. \\
-
+Let us say that the vector $\vec{s} = (s_1, s_2, \dots, s_M)$ be a PMF  (written as a row vector). We will call $\vec{s}$ the \textbf{stationary distribution} for the chain if $\vec{s}Q = \vec{s}$. \hide{As a consequence, if $X_t$ has the stationary distribution, then all future $X_{t+1}, X_{t + 2}, \dots$ also have the stationary distribution.} 
 
 For irreducible, aperiodic chains, the stationary distribution exists, is unique, and $s_i$ is the long-run probability of a chain being at state $i$. The expected number of steps to return to $i$ starting from $i$ is $1/s_i$.
 
@@ -636,7 +638,7 @@ For irreducible, aperiodic chains, the stationary distribution exists, is unique
 
 \textbf{Reversibility Condition Implies Stationarity}  If you have a PMF $\vec{s}$ and a Markov chain with transition matrix $Q$, then $s_iq_{ij} = s_jq_{ji}$ for all states $i, j$ implies that $\vec{s}$ is stationary. 
 
-\textbf{Columns Summing to One Implies Stationarity} If each column of the transition matrix $Q$ sums to 1, then the uniform distribution over all the states, $(1/M,1/M,\dots,1/M)$ is a stationary distribution. One example of this is a \underline{symmetric transition matrix} (in which case it's also reversible).
+\textbf{Columns Summing to One Implies Stationarity} If each column of the transition matrix $Q$ sums to 1, then the uniform distribution over all the states, $(1/M,1/M,\dots,1/M)$ is a stationary distribution. One example of this is a \underline{symmetric transition matrix}\hide{ (in which case it's also reversible)}.
 
 \subsection{Random Walk on an Undirected Network}
  \hide{\begin{minipage}{\linewidth}
@@ -645,7 +647,7 @@ For irreducible, aperiodic chains, the stationary distribution exists, is unique
         \end{minipage}}
 
 
-If you have a collection of \textbf{nodes}, pairs of which can be connected by undirected \textbf{edges}, and a Markov chain is run by going from the current node to a uniformly random node that is connected to it by an edge, then  this is a random walk on an undirected network. The stationary distribution of this chain is proportional to the \textbf{degree sequence} (this is the sequence of degrees, where the degree of a node is how many edges are attached to it). For example, the stationary distribution of random walk on the network shown above is proportional to $(3,3,2,4,2)$, so it's $(\frac{3}{14}, \frac{3}{14}, \frac{3}{14}, \frac{4}{14}, \frac{2}{14})$. 
+\hide{If you have a collection of \textbf{nodes}, pairs of which can be connected by undirected \textbf{edges}, and a Markov chain is run by going from the current node to a uniformly random node that is connected to it by an edge, then  this is a random walk on an undirected network. }The stationary distribution of a random walk chain is proportional to the \textbf{degree sequence} (this is the sequence of degrees, where the degree of a node is how many edges are attached to it). For example, the stationary distribution of random walk on the network shown above is proportional to $(3,3,2,4,2)$, so it's $(\frac{3}{14}, \frac{3}{14}, \frac{3}{14}, \frac{4}{14}, \frac{2}{14})$. 
 
 \hide{
 \subsection{Metropolis Algorithm}
@@ -681,13 +683,14 @@ This gives transition matrix $Q$ with $q_{ij}=p_{ij}a_{ij}$ if $i\neq j$, and $q
     Also, $\Gamma(a+1) = a \Gamma(a)$, and $\Gamma(n) = (n - 1)!$ if $n$ is a positive integer. 
 \end{enumerate}
 
-\section{Summary Statistics}
+\section{STAT 111 Stuff} \hrule height 1pt
+\subsection{Summary Statistics}
 \begin{description}
 \item[Medians and Quantiles] Let $X$ have CDF $F$. Then $X$ has median $m$ if $F(m) \geq 0.5$ and $P(X \geq m) \geq 0.5$. For $X$ continuous, $m$ satisfies $F(m)=1/2$. In general, the $a$th quantile of $X$ is $\min \{x: F(x)\geq a\}$; the median is the case $a=1/2$.
 \item[Standard Error] $SE(\hat \theta) = \sqrt{Var(\hat \theta)}$
 \end{description}
 
-\section{Likelihood}
+\subsection{Likelihood}
 \hide{Let $f_{\vec Y}$ be a model for the joint density function of all the observations. Let $\vec{y}$ be the observed value of $\vec{Y}$. Then the likelihood function is:}
 \[ L(\theta;\vec y)=f_{\vec{Y}}(y|\theta) \]
 It is regarded as a function of $\theta$, with $y$ treated as fixed.
@@ -700,7 +703,7 @@ So the posterior is proportional to likelihood times prior.
 \item[Equivalence] Two likelihood functions are viewed as equivalent if one is a positive constant times the other. In fact, the ``constant'' can even be function of the data (it just can’t depend on the parameter).
 \item[Invariance] Let $\psi=g(\theta)$ be a reparametrization, where $g$ is a one-to-one function. Then $L(\psi;\vec{y}=L(\theta;\vec{y})$.
 \end{description}
-\section{Estimands, Estimators, \& Estimates}
+\subsection{Estimands, Estimators, \& Estimates}
 \begin{description}
 \hide{
 \item[Statistic] A statistic is a function of $Y_1,...,Y_n$ (and possibly other known quantities). We can write a statistic as $T(Y)$, where computing the function $T$ must not require knowing any unknown parameters. \underline{Note:} The \textit{distribution} of a statistic can depend on unknown parameters.}
@@ -708,14 +711,14 @@ So the posterior is proportional to likelihood times prior.
 \item[Estimator] An estimator $\hat\theta=T(\vec{Y})$ is a statistic with the intention of estimating an estimand $\theta$.
 \item[Estimate] An estimate is a realization of an estimator. If $T(Y)$ is an estimator of some estimand $\theta$, then $T(y)$ is an estimate of $\theta$.
 \end{description}
-\section{Method of Moments}
+\subsection{Method of Moments}
 Set the expectation of the sample moments equal to the actual sample moments. Compute the expectation in terms of the unknown parameter(s) and rearrange to get the estimator. Write as many equations as you have parameters, one equation per moment. For example, suppose you have unknown parameters $\theta$ and $\lambda$.
 \begin{align*}
     \text{1st moment } E(\frac{1}{n}\sum X_i) = f(\theta, \lambda) \\
     \text{2nd moment } E(\frac{1}{n}\sum X_i^2) = f(\theta, \lambda) \\
 \end{align*}
 You can then solve this system of equations for $\hat \theta$ and $\hat lambda$. 
-\section{Maximum Likelihood Estimation}
+\subsection{Maximum Likelihood Estimation}
 The \textbf{maximum likelihood estimate} of $\theta$ is the value $\hat\theta$ that maximizes the likelihood function $L(\theta; y)$. \hide{The corresponding estimator is called the \textbf{maximum likelihood estimator}. That is, if the maximum likelihood estimate is $T(y)$, then the maximum likelihood estimator is $T(Y)$.}
 \begin{description}
 \item[Regularity conditions] Support must not depend on the value of the estimand. The estimate $\theta^*$ must not be on the boundary. You must be able to Differentiate under the Integral Sign, i.e. $\frac{d}{d\theta} \int g(y)f_\theta(y)dy = \int \frac{d}{d\theta} g(y)f_\theta(y)dy$. The estimand must be of a fixed dimension.
@@ -725,14 +728,14 @@ The \textbf{maximum likelihood estimate} of $\theta$ is the value $\hat\theta$ t
 \item[Asymptotically unbiased] The MLE is asymptotically unbiased (the bias approaches 0 as the sample size grows).
 \item[Asymptotically efficient] The MLE is asymptotically efficient (no other asymptotically unbiased estimator will have a lower standard error asymptotically).
 \end{description}
-\section{Bias, Variance and Loss Functions}
+\subsection{Bias, Variance and Loss Functions}
 \begin{description}
 \item[Bias] The bias of an estimator $\hat\theta$ for $\theta$ is $E(\hat\theta)-\theta$.
 \item[Loss function] A loss function is a function $L(\theta,\hat\theta)$, interpreted as the loss associated with using the estimate $\hat\theta$ when the true parameter value is $\theta$. We require that $L(\hat\theta,\theta)\geq 0$ and $L(\theta,\theta)=0$.
 \item[Mean squared error] The mean squared error is $E(\hat\theta-\theta)^2$.
 \item[Bias-variance decomposition] We know $\MSE_{\theta}=\var_\theta(\hat\theta)+(\bias_\theta(\hat\theta))^2$. This illustrates the \textit{bias-variance tradeoff}.
 \end{description}
-\section{Estimators for CDF and PDF}
+\hide{\section{Estimators for CDF and PDF}}
 \subsection{Kernel Density Estimation}
 Suppose the estimand is the density of $Y_1$ at a particular point $y_1$: $\theta=f_{Y_1}(y_1)$. The kernel density estimator is:
 \[\hat f_n(y)=\frac{1}{n}\frac{1}{h}K(\frac{Y_i-y}{h})\]
@@ -793,16 +796,16 @@ The \textit{delta method} says that if:
 \[\sqrt{n}(\hat{\theta} - \mu)\todist \N(0,\sigma^2)\] and $g$ is a differentiable function, then: \[\sqrt{n}(g(\hat{\theta}) - g(\mu))\todist \N(0, (g'(\mu))^2 \sigma^2)\]
 \subsection{Interval Estimation}
 Use a pivot to write a function of the estimator of interest that has a distribution whose parameters are known (ex. changing $X \sim \Expo(\lambda)$ to $\lambda X \sim \Expo(1)$. This known distribution also has a known CDF whose function you can use to construct the confidence interval.
-\section{Sufficient Statistics}
-\subsection{Definition of Sufficient Statistics}
+\subsection{Sufficient Statistics}
+\subsubsection{Definition of Sufficient Statistics}
 Let $\textbf{Y} = (Y_1,..Y_n)$ be a sample from model $F_y(y|\theta)$. A statistic $T(Y)$ is a sufficient statistic for $\theta$ if conditional distribution of $Y|T$ does not depend on $\theta$.
-\subsection{Factorization Criterion}
+\subsubsection{Factorization Criterion}
 T(Y) is a sufficient statistic if and only if we can factor $$f_y(y|\theta) = g(T(y),\theta)h(y)$$ where $f_y(y|\theta)$ is the PMF/PDF of $Y$.
-\subsection{Rao-Blackwell}
+\subsubsection{Rao-Blackwell}
 Let T be a sufficient statistic and $\hat \theta$ be any estimator for $\theta$. Then the MSE of the Rao-Blackwellized estimator $\hat \theta_RB = E(\theta |T)$ does not exceed the MSE of the original estimator. This can be proven with the bias-variance decomposition and Adam and Eve's Laws.
-\section{Natural Exponential Family}
-\subsection{Definition} An r.v. follows NEF if its PDF is in the form $$f_y(y|\theta) = e^{\theta y - \Psi(\theta)}h(y)$$ Where $\theta$ is the natural parameter. Note that $\theta$ doesn't necessarily have to be a parameter of interest, e.g. it could be $-\mu$ instead of $\mu$ for a normal distribution.
-\subsection{Fun Facts}
+\subsection{Natural Exponential Family}
+ An r.v. follows NEF if its PDF is in the form $$f_y(y|\theta) = e^{\theta y - \Psi(\theta)}h(y)$$ Where $\theta$ is the natural parameter. Note that $\theta$ doesn't necessarily have to be a parameter of interest, e.g. it could be $-\mu$ instead of $\mu$ for a normal distribution.
+\subsubsection{Fun Facts}
 If $Y$ is in NEF form (e.g. Normal ($\sigma^2$ known), Poisson, Binomial (n fixed), Negative Binomial (r fixed), $\Gamma(a, \lambda)$ (a known), then we have the following facts.
 \begin{enumerate}
     \item $E(Y) = \Psi'(\theta), \var(\theta) = \Psi''(\theta)$, MGF $M_y(t) = E(e^{tY}) = e^{\Psi(\theta + t) - \Psi(\theta)}$.
@@ -811,7 +814,7 @@ If $Y$ is in NEF form (e.g. Normal ($\sigma^2$ known), Poisson, Binomial (n fixe
     \item Fisher Information $I_1(\theta) = \Psi''(\theta)$.
 \end{enumerate}
 
-\section{MLEs \& Fisher Informations}
+\subsection{MLEs \& Fisher Informations}
 \begin{itemize}
     \item Bernoulli: $\hat p = \bar Y$. $I_1(p) = \frac{1}{pq}$
     \item Binomial: $\hat p = \frac{y}{n}$. $I_n(p) = \frac{n}{pq}$
