@@ -131,7 +131,6 @@
 %%% BEGIN CHEATSHEET
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Random Variables and Distributions}
 \subsection{Universality of Uniform (UoU)} When you plug any CRV into its own CDF, you get a $\Unif(0,1)$ random variable. When you plug a $\Unif(0,1)$ r.v.~into an inverse CDF, you get an r.v.~with that CDF. For example, let's say that a random variable $X$ has CDF
     \[ F(x) = 1 - e^{-x}, \textrm{ for $x>0$} \]
     By  UoU, if we plug $X$ into this function then we get a uniformly distributed random variable.
@@ -689,11 +688,11 @@ This gives transition matrix $Q$ with $q_{ij}=p_{ij}a_{ij}$ if $i\neq j$, and $q
 \end{description}
 
 \section{Likelihood}
-Let $f_{\vec Y}$ be a model for the joint density function of all the observations. Let $\vec{y}$ be the observed value of $\vec{Y}$. Then the likelihood function is:
+\hide{Let $f_{\vec Y}$ be a model for the joint density function of all the observations. Let $\vec{y}$ be the observed value of $\vec{Y}$. Then the likelihood function is:}
 \[ L(\theta;\vec y)=f_{\vec{Y}}(y|\theta) \]
 It is regarded as a function of $\theta$, with $y$ treated as fixed.
 \begin{description}
-\item[Frequentist Interpretation] $\theta$ is regarded as fixed but unknown, and it does not have a distribution. If $L(\theta_2)>L(\theta_1)$, strictly speaking we cannot say that $\theta_2$ is more likely than $\theta_1$ to be the true value of $\theta$. However, we can say that $\theta$ seems more plausible than $\theta$ as a source for generating the data.
+\item[Frequentist Interpretation] $\theta$ is regarded as fixed but unknown, and it does not have a distribution. \hide{If $L(\theta_2)>L(\theta_1)$, strictly speaking we cannot say that $\theta_2$ is more likely than $\theta_1$ to be the true value of $\theta$. However, we can say that $\theta$ seems more plausible than $\theta$ as a source for generating the data.}
 \item[Bayesian Interpretation]
 We have a prior density $g(\theta)$ for $\theta$, then:
 \[L(\theta)=g(\theta|\vec{y}=\frac{g(\theta)f(y|\theta)}{f(\vec{y})}\propto g(\theta)f(y|\theta)=L(\theta)g(\theta)\]
@@ -701,9 +700,10 @@ So the posterior is proportional to likelihood times prior.
 \item[Equivalence] Two likelihood functions are viewed as equivalent if one is a positive constant times the other. In fact, the ``constant'' can even be function of the data (it just can’t depend on the parameter).
 \item[Invariance] Let $\psi=g(\theta)$ be a reparametrization, where $g$ is a one-to-one function. Then $L(\psi;\vec{y}=L(\theta;\vec{y})$.
 \end{description}
-\section{Statistics, Estimands, Estimators, \& Estimates}
+\section{Estimands, Estimators, \& Estimates}
 \begin{description}
-\item[Statistic] A statistic is a function of $Y_1,...,Y_n$ (and possibly other known quantities). We can write a statistic as $T(Y)$, where computing the function $T$ must not require knowing any unknown parameters. \underline{Note:} The \textit{distribution} of a statistic can depend on unknown parameters.
+\hide{
+\item[Statistic] A statistic is a function of $Y_1,...,Y_n$ (and possibly other known quantities). We can write a statistic as $T(Y)$, where computing the function $T$ must not require knowing any unknown parameters. \underline{Note:} The \textit{distribution} of a statistic can depend on unknown parameters.}
 \item[Estimand] An estimand is an object that we wish to learn about from data.
 \item[Estimator] An estimator $\hat\theta=T(\vec{Y})$ is a statistic with the intention of estimating an estimand $\theta$.
 \item[Estimate] An estimate is a realization of an estimator. If $T(Y)$ is an estimator of some estimand $\theta$, then $T(y)$ is an estimate of $\theta$.
@@ -716,7 +716,7 @@ Set the expectation of the sample moments equal to the actual sample moments. Co
 \end{align*}
 You can then solve this system of equations for $\hat \theta$ and $\hat lambda$. 
 \section{Maximum Likelihood Estimation}
-The \textbf{maximum likelihood estimate} of $\theta$ is the value $\hat\theta$ that maximizes the likelihood function $L(\theta; y)$. The corresponding estimator is called the \textbf{maximum likelihood estimator}. That is, if the maximum likelihood estimate is $T(y)$, then the maximum likelihood estimator is $T(Y)$.
+The \textbf{maximum likelihood estimate} of $\theta$ is the value $\hat\theta$ that maximizes the likelihood function $L(\theta; y)$. \hide{The corresponding estimator is called the \textbf{maximum likelihood estimator}. That is, if the maximum likelihood estimate is $T(y)$, then the maximum likelihood estimator is $T(Y)$.}
 \begin{description}
 \item[Regularity conditions] Support must not depend on the value of the estimand. The estimate $\theta^*$ must not be on the boundary. You must be able to Differentiate under the Integral Sign, i.e. $\frac{d}{d\theta} \int g(y)f_\theta(y)dy = \int \frac{d}{d\theta} g(y)f_\theta(y)dy$. The estimand must be of a fixed dimension.
 \item[Invariance] If $\hat\theta$ is the MLE of $\theta$, then $g(\hat\theta)$ is the MLE of $\hat\theta$.
@@ -736,11 +736,9 @@ The \textbf{maximum likelihood estimate} of $\theta$ is the value $\hat\theta$ t
 \subsection{Kernel Density Estimation}
 Suppose the estimand is the density of $Y_1$ at a particular point $y_1$: $\theta=f_{Y_1}(y_1)$. The kernel density estimator is:
 \[\hat f_n(y)=\frac{1}{n}\frac{1}{h}K(\frac{Y_i-y}{h})\]
-where $h>0$ is called the \textit{bandwidth} and $K$ is called the \textit{kernel function}. The kernel function must be a PDF (nonnegative and summing to 1).
-
-For instance, the Gaussian kernel takes $K$ to be a Normal PDF centered at 0. The intuitive idea of the KDE for the Gaussian case is to place a little Normal distribution centered at each data point, and then mix all these Normal distributions together to obtain a single smooth PDF. The bandwidth
+where $h>0$ is called the \textit{bandwidth} and $K$ is called the \textit{kernel function}. The kernel function must be a PDF (nonnegative and summing to 1). For instance, the Gaussian kernel takes $K$ to be a Normal PDF centered at 0. \hide{The intuitive idea of the KDE for the Gaussian case is to place a little Normal distribution centered at each data point, and then mix all these Normal distributions together to obtain a single smooth PDF. The bandwidth
 $h$ controls how tightly concentrated or spread out each of the $n$ little Normal PDFs
-is about the $y$ it is centered at.
+is about the $y$ it is centered at.}
 \section{Asymptotics and Information}
 \subsection{Consistency}
 An estimator $\hat\theta$ is \textbf{consistent} for the estimand $\theta$ if $\hat\theta$ converges in probability to the true $\theta$ as the sample size $n\to\infty$, i.e. for every $\epsilon>0$, we have $\lim_{n\to\infty} P(|\hat\theta-\theta|\geq\epsilon)=0$.
