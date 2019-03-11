@@ -22,7 +22,6 @@
 \usepackage{hyperref}
 \usepackage{relsize}
 \usepackage{rotating}
-\usepackage{comment}
 \usepackage{lastpage}
 
  \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
@@ -54,9 +53,10 @@
 \newcommand{\todist}{\xrightarrow{D}}
 \newcommand{\I}{\mathbb{I}}
 \renewcommand\vec{\mathbf}
-\newcommand{\hide}[1]{\iffalse #1 \fi}
+\newcommand{\hide}[1]{}
 
-\geometry{top=.15in,left=.2in,right=.2in,bottom=.2in,includehead}
+
+\geometry{top=.15in,left=.2in,right=.2in,bottom=.0in,includehead}
 
 \pagestyle{empty}
 \makeatletter
@@ -65,7 +65,7 @@
                                 {0ex plus 0ex}%x
                                 {\normalfont\medium\bfseries}}
 \renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
-                                {-1explus -.5ex minus -.2ex}%
+                                {-1explus 0ex minus -.2ex}%
                                 {0ex plus 0ex}%
                                 {\normalfont\small\bfseries}}
 \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
@@ -77,12 +77,12 @@
 \setcounter{secnumdepth}{0}
 
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt plus 0.2ex}
+\setlength{\parskip}{0pt plus 0.1ex}
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\setlength{\headsep}{1pt}
-\setlength{\headheight}{15.2pt}
+\setlength{\headsep}{0pt}
+\setlength{\headheight}{10pt}
 \renewcommand{\headrulewidth}{0pt}
 \fancyhf{}
 \fancyhf[lh]{\thepage}
@@ -92,14 +92,14 @@
 \usepackage{titlesec}
 \definecolor{awesome}{rgb}{0.0, 0.28, 0.67}
 \titleformat{\section}
-{\color{blue}\normalfont\large\bfseries}
+{\color{blue}\normalfont\normalsize\bfseries}
 {\color{blue}\thesection}{1em}{}
 \titleformat{\subsection}
-{\color{awesome}\normalfont\normalsize\bfseries}
+{\color{awesome}\normalfont\small\bfseries}
 {\color{awesome}\thesection}{1em}{}
 
 \titleformat{\subsubsection}
-{\color{violet}\normalfont\small\bfseries}
+{\color{violet}\small\footnotesize\bfseries}
 {\color{violet}\thesection}{1em}{}
 % Comment out the above 5 lines for black and white
 \begin{document}
@@ -114,7 +114,7 @@
 \setlength{\premulticols}{1pt}
 \setlength{\postmulticols}{1pt}
 \setlength{\multicolsep}{1pt}
-\setlength{\columnsep}{2pt}
+\setlength{\columnsep}{1pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% TITLE
@@ -135,15 +135,16 @@
 %%% BEGIN CHEATSHEET
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{STAT 111 Distributions}\hrule height 1pt \smallskip
-\subsection{Universality of Uniform (UoU)} When you plug any CRV into its own CDF, you get a $\Unif(0,1)$ random variable. When you plug a $\Unif(0,1)$ r.v.~into an inverse CDF, you get an r.v.~with that CDF. For example, let's say that a random variable $X$ has CDF
+\section{Distributions}\hrule height 1pt \smallskip
+\subsection{Universality of Uniform} When you plug any CRV into its own CDF, you get a $\Unif(0,1)$ random variable. When you plug a $\Unif(0,1)$ r.v.~into an inverse CDF, you get an r.v.~with that CDF. \hide{For example, let's say that a random variable $X$ has CDF
     \[ F(x) = 1 - e^{-x}, \textrm{ for $x>0$} \]
     By  UoU, if we plug $X$ into this function then we get a uniformly distributed random variable.
-    \[ F(X) = 1 - e^{-X} \sim \textrm{Unif}(0,1)\]
+    \[ F(X) = 1 - e^{-X} \sim \textrm{Unif}(0,1)\]}
     Similarly, if $U \sim \textrm{Unif}(0,1)$ then $F^{-1}(U)$ has CDF $F$. The key point is that {for any continuous random variable $X$, we can transform it into a Uniform random variable and back by using its CDF.}
 
 \subsection{Binomial Distribution} Let $X \sim \Bin(n,p), Y \sim \Bin(m,p)$ with $X \independent Y$.
 \begin{itemize}
+\itemsep0em
 \item \textbf{Redefine success} $n-X \sim \Bin(n,1-p)$
 \item \textbf{Sum} $X+Y \sim \Bin(n+m,p)$
 \item \textbf{Conditional} $X|(X+Y=r) \sim \HGeom(n,m,r)$ (\underline{Fisher exact test})
@@ -159,24 +160,25 @@
 Let $X \sim \Pois(\lambda_1)$ and $Y \sim \Pois(\lambda_2)$, with $X \independent Y$.
 
 \begin{itemize}
+    \itemsep-0.5em
     \item \textbf{Sum} $X + Y \sim \Pois(\lambda_1 + \lambda_2)$
     \item \textbf{Conditional} $X | (X + Y = n) \sim \Bin\left(n, \frac{\lambda_1}{\lambda_1 + \lambda_2}\right)$
     \item \textbf{Chicken-egg} If there are $Z \sim \Pois(\lambda)$ items and we randomly and independently ``accept" each item with probability $p$, then the number of accepted items $Z_1 \sim \Pois(\lambda p)$, and the number of rejected items $Z_2 \sim \Pois(\lambda (1-p))$, and $Z_1 \independent Z_2$.
 \end{itemize}
 \hide{\section{Continuous Distributions}}
-\begin{comment}
+\hide{
 \subsection{Uniform Distribution} . \begin{itemize}
 \item Let $U\sim\Unif(a,b)$ and $(c,d)$ be a subinterval of $(a,b)$. Then $U|U\in (c,d) \sim \Unif(c,d)$.
 \end{itemize}
-\end{comment}
+}
 \subsection{Normal Distribution} Let us say that $X$ is distributed $\N(\mu, \sigma^2)$. We know the following:
 \begin{description}
-    \item[CDF and PDF] $$F(x) =\Phi\left(\frac{x-\mu}{\sigma}\right) $$
-$$f(x) = \varphi\left(\frac{x-\mu}{\sigma}\right)\frac{1}{\sigma}$$
+    \item[CDF and PDF] $F(x) =\Phi\left(\frac{x-\mu}{\sigma}\right) $
+$f(x) = \varphi\left(\frac{x-\mu}{\sigma}\right)\frac{1}{\sigma}$
     \item[Location-Scale Transformation] Every time we shift a Normal r.v.~(by adding a constant) or rescale a Normal (by multiplying by a constant), we change it to another Normal r.v. For any Normal $X \sim \N(\mu, \sigma^2)$, we can transform it to the standard $\N(0, 1)$ by the following transformation:
     \[Z= \frac{X - \mu}{\sigma} \sim \N(0, 1) \]
     \item[Standard Normal] The Standard Normal, $Z \sim \N(0, 1)$, has mean $0$ and variance $1$. Its odd central moments are all $0$ as well.
-    \item[Transformations] For constant $a$, $aX \sim N(\mu, a^2\sigma^2)$. For $Y \sim \N(\mu_Y, \sigma_Y^2)$, $X + Y \sim (\mu + \mu_Y, \sigma^2 + \sigma_Y^2)$
+    \item[Transformations] For constant $a$, $aX \sim N(a\mu, a^2\sigma^2)$. For $Y \sim \N(\mu_Y, \sigma_Y^2)$, $X + Y \sim (\mu + \mu_Y, \sigma^2 + \sigma_Y^2)$
     \item[Sum is Normal] If $X_1$ and $X_2$ are independent and $X_1+X_2$ is Normal, then $X_1$ and $X_2$ must be Normal.
     
 \end{description}
@@ -278,14 +280,15 @@ Let us say that $X$ is distributed $\chi^2_n$. We know the following:
         \[ (X_1+X_2,X_3+X_4+X_5,X_6) \sim \Mult_3(n, (p_1+p_2, p_3 + p_4+p_5,p_6))\]
         }
         Conditioning on some $X_j$ also still gives a Multinomial:
-        \[X_1, \dots, X_{k-1} | X_k = n_k \sim \Mult_{k-1}\left(n - n_k, \left(\frac{p_1}{1 - p_k}, \dots, \frac{p_{k-1}}{1 - p_k}\right)\right)\]
+
+        $X_1, \dots, X_{k-1} | X_k = n_k \sim \Mult_{k-1}\left(n - n_k, \left(\frac{p_1}{1 - p_k}, \dots, \frac{p_{k-1}}{1 - p_k}\right)\right)$
     \item[Variances and Covariances]  We have  $X_i \sim \Bin(n, p_i)$ marginally, so $\var(X_i) = np_i(1-p_i)$. Also, $\cov(X_i, X_j) = -np_ip_j$ for $i \neq j$.
     \end{description}
     
-\begin{comment}
+\hide{
 \subsection{Multivariate Uniform Distribution}
 See the univariate Uniform for stories and examples. For the 2D Uniform on some region, probability is proportional to area. Every point in the support has equal density, of value $\frac{1}{\textnormal{area of region}}$. For the 3D Uniform, probability is proportional to volume.
-\end{comment}
+}
 
 \subsection{Multivariate Normal (MVN) Distribution}
 A  vector $\vec{X} = (X_1, X_2, \dots, X_k)$ is  Multivariate Normal if every linear combination is Normally distributed, i.e., $t_1X_1 + t_2X_2 + \dots + t_kX_k$ is Normal for any constants $t_1, t_2, \dots, t_k$. The parameters of the Multivariate Normal are the \textbf{mean vector} $\vec{\mu} = (\mu_1, \mu_2, \dots, \mu_k)$ and the \textbf{covariance matrix} where the $(i, j)$ entry is $\cov(X_i, X_j)$. 
@@ -293,6 +296,7 @@ A  vector $\vec{X} = (X_1, X_2, \dots, X_k)$ is  Multivariate Normal if every li
 \begin{description}
 \item[Properties] The Multivariate Normal has the following properties.
 \begin{itemize}
+\itemsep0em
 \item Any subvector is also MVN.
 \item If any two elements within an MVN are uncorrelated, then they are independent.
 \item The joint PDF of a Bivariate Normal $(X,Y)$ with $\N(0,1)$ marginal distributions and correlation $\rho \in (-1,1)$ is 
@@ -304,6 +308,7 @@ with $\tau = \sqrt{1-\rho^2}.$
 \hide{\section{Distribution Properties} \hrule height 1pt \smallskip}
 \subsection{Important CDFs}
 \begin{description}
+    \itemsep0em
    \item[Standard Normal] $\Phi$
     \item[Exponential($\lambda$)] $F(x) = 1 - e^{-\lambda x}, \textrm{ for } x \in (0, \infty)$
     \item[Uniform(0,1)] $F(x) = x, \textrm{ for } x \in (0, 1)$
@@ -312,6 +317,7 @@ with $\tau = \sqrt{1-\rho^2}.$
 \subsection{Convolutions of Random Variables}
 A convolution of $n$ random variables is simply their sum. For the following results, let $X$ and $Y$ be \emph{independent}.
 \begin{enumerate}
+    \itemsep0em
     \item  $X \sim \Pois(\lambda_1)$, $Y \sim \Pois(\lambda_2)$ $\longrightarrow X + Y \sim \Pois(\lambda_1 + \lambda_2)$
     \item  $X \sim \Bin(n_1, p)$, $Y \sim \Bin(n_2, p)$ $\longrightarrow X + Y \sim \Bin(n_1 + n_2, p)$. $\Bin(n,p)$ can be thought of as a sum of i.i.d.~$\Bern(p)$ r.v.s.
     \item  $X \sim \Gam(a_1, \lambda)$, $Y \sim \Gam(a_2, \lambda)$ $\longrightarrow  X + Y \sim\Gam(a_1 + a_2, \lambda)$.  $\Gam(n,\lambda)$ with $n$ an integer can  be thought of as a sum of i.i.d.~Expo($\lambda$) r.v.s.
@@ -320,6 +326,7 @@ A convolution of $n$ random variables is simply their sum. For the following res
 \end{enumerate}
 \subsection{Symmetry}
 \begin{enumerate}
+\itemsep0em
 \item If $X\sim \Bin(n, 1/2)$, then $n-X\sim\Bin(n, 1/2)$.
 \item If $U\sim\Unif(0,1)$, then $1-U\sim\Unif(0,1)$.
 \item If $Z\sim\N(0,1)$, then $-Z\sim\N(0,1)$. $\varphi(z)=\varphi(-z)$.
@@ -328,6 +335,7 @@ A convolution of $n$ random variables is simply their sum. For the following res
 
 \subsection{Special Cases of Distributions}
 \begin{enumerate}
+    \itemsep0em
     \item $\Bin(1, p) \sim \Bern(p)$
     \item $\Beta(1, 1) \sim \Unif(0, 1)$
     \item $\Gam(1, \lambda) \sim \Expo(\lambda)$
@@ -351,7 +359,7 @@ A distribution is symmetric around its mean $\mu$ if $X-\mu$ has the same distri
         is the \textbf{moment generating function (MGF)} of $X$, if it exists for all $t$ in some open interval containing $0$. \hide{The variable $t$ could just as well have been called $u$ or $v$. It's a bookkeeping device that lets us work with the \emph{function} $M_X$ rather than the \emph{sequence} of moments. }
                 
             \item[Why is it called the Moment Generating Function?] Because the $k$th derivative of the moment generating function, evaluated at $0$, is the $k$th moment of $X$.
-    \[\mu_k = E(X^k) = M_X^{(k)}(0)\]
+    $$\mu_k = E(X^k) = M_X^{(k)}(0)$$
     \hide{This is true by Taylor expansion of $e^{tX}$ since
     \[M_X(t) = E(e^{tX}) = \sum_{k=0}^\infty \frac{E(X^k)t^k}{k!} = \sum_{k=0}^\infty \frac{\mu_k t^k}{k!} \]}
 
@@ -418,7 +426,8 @@ For continuous random variables:
 \begin{description}
     \label{one variable transformations}
     \item[One Variable Transformations] Let's say that we have a random variable $X$ with PDF $f_X(x)$, but we are also interested in some function of $X$. We call this function $Y = g(X)$. Also let $y=g(x)$. If $g$ is differentiable and strictly increasing (or strictly decreasing), then the PDF of $Y$ is
-    \[f_Y(y) = f_X(x)\left|\frac{dx}{dy}\right| =  f_X(g^{-1}(y))\left|\frac{d}{dy}g^{-1}(y)\right|\]
+
+    $f_Y(y) = f_X(x)\left|\frac{dx}{dy}\right| =  f_X(g^{-1}(y))\left|\frac{d}{dy}g^{-1}(y)\right|$
     \hide{
     The derivative of the inverse transformation is called the \textbf{Jacobian}.
 
@@ -576,14 +585,15 @@ If the $X_i$ are i.i.d.~with mean $\mu_X$ and variance $\sigma^2_X$, then $\mu_Y
 
 \subsubsection{Asymptotic Distributions using CLT}
 
-We use $\xrightarrow{D}$ to denote \emph{converges in distribution to} as $n  \to \infty$. The CLT says that if we standardize the sum $X_1 + \dots + X_n$  then the distribution of the sum converges to $\N(0,1)$ as $n \to \infty$:
+We use $\xrightarrow{D}$ to denote \emph{converges in distribution to} as $n  \to \infty$. \hide{The CLT says that if we standardize the sum $X_1 + \dots + X_n$  then the distribution of the sum converges to $\N(0,1)$ as $n \to \infty$:
 \[\frac{1}{\sigma\sqrt{n}} (X_1 + \dots + X_n - n\mu_X) \xrightarrow{D} \N(0, 1)\]
-In other words, the CDF of the left-hand side goes to the standard Normal CDF, $\Phi$. In terms of the sample mean, the CLT says
+In other words, the CDF of the left-hand side goes to the standard Normal CDF, $\Phi$. In terms of the sample mean, the CLT says}
 \[ \frac{\sqrt{n} (\bar{X}_n - \mu_X)}{\sigma_X} \xrightarrow{D} \N(0, 1)\]
+\[ \sqrt{n} (\bar{X}_n - \mu_X) \xrightarrow{D} \N(0, \sigma_X^2)\]
 
-\section{Markov Chains}\hrule height 1pt \smallskip
+\subsection{Markov Chains}\hrule height 1pt \smallskip
 
-\subsection{Definition}
+\subsubsection{Definition}
 \hide{
 \begin{minipage}{\linewidth}
             \centering
@@ -593,7 +603,7 @@ A Markov chain is a random walk in a \textbf{state space}, which we will assume 
 A Markov chain must satisfy the \textbf{Markov property}, which says that if you want to predict where the chain will be at a future time, if we know the present state then the entire past history is irrelevant.  \emph{Given the present, the past and future are conditionally independent}. In symbols,
 \[P(X_{n+1} = j | X_0 = i_0, X_1 = i_1, \dots, X_n = i) = P(X_{n+1} = j | X_n = i)\]
 \hide{
-\subsection{State Properties}
+\subsubsection{State Properties}
 A state is either recurrent or transient.
 \begin{itemize}
 \item If you start at a \textbf{recurrent state}, then you will always return back to that state at some point in the future.  \textmusicalnote \emph{You can check-out any time you like, but you can never leave.}  \textmusicalnote
@@ -609,7 +619,7 @@ $i$, starting from $i$, is a positive number $p > 0$. Then, starting from $i$, t
 times that the chain returns to $i$ before leaving forever is distributed $\Geom(p)$.}
 
 
-\subsection{Transition Matrix}
+\subsubsection{Transition Matrix}
 Let the state space be $\{1,2,\dots,M\}$. The transition matrix $Q$ is the $M \times M$ matrix where element $q_{ij}$ is the probability that the chain goes from state $i$ to state $j$ in one step:
 \[q_{ij} = P(X_{n+1} = j | X_n = i)\]
 
@@ -619,12 +629,12 @@ If $X_0$ is distributed according to the row vector PMF $\vec{p}$, i.e., $p_j = 
 
 
 
-\subsection{Chain Properties}
+\subsubsection{Chain Properties}
 A chain is \textbf{irreducible} if you can get from anywhere to anywhere. If a chain (on a finite state space) is irreducible, then all of its states are recurrent. A chain is \textbf{periodic} if any of its states are periodic, and is \textbf{aperiodic} if none of its states are periodic. In an irreducible chain, all states have the same period. \smallskip
 
 A chain is \textbf{reversible} with respect to $\vec{s}$ if $s_iq_{ij} = s_jq_{ji}$ for all $i, j$.  Examples of reversible chains include any chain with $q_{ij} = q_{ji}$, with $\vec{s} = (\frac{1}{M}, \frac{1}{M}, \dots, \frac{1}{M})$, and random walk on an undirected network.
 
-\subsection{Stationary Distribution}
+\subsubsection{Stationary Distribution}
 
 Let us say that the vector $\vec{s} = (s_1, s_2, \dots, s_M)$ be a PMF  (written as a row vector). We will call $\vec{s}$ the \textbf{stationary distribution} for the chain if $\vec{s}Q = \vec{s}$. \hide{As a consequence, if $X_t$ has the stationary distribution, then all future $X_{t+1}, X_{t + 2}, \dots$ also have the stationary distribution.} 
 
@@ -640,7 +650,7 @@ For irreducible, aperiodic chains, the stationary distribution exists, is unique
 
 \textbf{Columns Summing to One Implies Stationarity} If each column of the transition matrix $Q$ sums to 1, then the uniform distribution over all the states, $(1/M,1/M,\dots,1/M)$ is a stationary distribution. One example of this is a \underline{symmetric transition matrix}\hide{ (in which case it's also reversible)}.
 
-\subsection{Random Walk on an Undirected Network}
+\subsubsection{Random Walk on an Undirected Network}
  \hide{\begin{minipage}{\linewidth}
             \centering
 \includegraphics[width=0.2\columnwidth]{figures/network1.pdf}
@@ -659,9 +669,10 @@ Let $\vec{s}$ be the desired stationary distribution. Let $P$ be a transition ma
 This gives transition matrix $Q$ with $q_{ij}=p_{ij}a_{ij}$ if $i\neq j$, and $q_{ii}=p_ii+\sum_{j\neq 1} p_{ij} (1-q_{ij})$ if $i=j$. We can show this is reversible.
 }
 
-\section{Inequalities}
+\section{Inequalities} \hrule height 1pt \smallskip
 
 \begin{enumerate}
+\itemsep0em
 \item \textbf{Cauchy-Schwarz} $|E(XY)| \leq \sqrt{E(X^2)E(Y^2)}$
 \item \textbf{Markov} $P(X \geq a) \leq \frac{E|X|}{a}$ for $a>0$
 \item \textbf{Chebyshev} $P(|X - \mu| \geq a) \leq \frac{\sigma^2}{a^2}$ for $E(X)=\mu, \var(X) = \sigma^2$. Useful for proving convergence in probability; to prove consistency of estimator we just need to show that its variance goes to 0.
@@ -672,8 +683,8 @@ This gives transition matrix $Q$ with $q_{ij}=p_{ij}a_{ij}$ if $i\neq j$, and $q
 
 \section{Formulas} \hrule height 1pt \smallskip
 \begin{enumerate}
-    \item \textbf{Geometric Series } 
-    
+    \itemsep0em
+    \item \textbf{Geometric Series } \\
     $1 + r + r^2 + \dots + r^{n-1} = \sum_{k=0}^{n-1} r^k = \frac{1 - r^n}{1 -r}$
     $1 + r + r^2 + \dots = \frac{1}{1-r} \textnormal{ if $|r|<1$}$
     \item $\mathbf{e^x} = \sum_{n=0}^\infty \frac{x^n}{n!}= 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \dots = \lim_{n \rightarrow \infty} \left( 1 + \frac{x}{n} \right)^n$
@@ -687,7 +698,7 @@ This gives transition matrix $Q$ with $q_{ij}=p_{ij}a_{ij}$ if $i\neq j$, and $q
 \subsection{Summary Statistics}
 \begin{description}
 \item[Medians and Quantiles] Let $X$ have CDF $F$. Then $X$ has median $m$ if $F(m) \geq 0.5$ and $P(X \geq m) \geq 0.5$. For $X$ continuous, $m$ satisfies $F(m)=1/2$. In general, the $a$th quantile of $X$ is $\min \{x: F(x)\geq a\}$; the median is the case $a=1/2$.
-\item[Standard Error] $SE(\hat \theta) = \sqrt{Var(\hat \theta)}$
+\item[Standard Error] $SE(\hat \theta) = \sqrt{\var(\hat \theta)}$
 \end{description}
 
 \subsection{Likelihood}
@@ -762,9 +773,10 @@ where the expectation is computed under the distribution $\vec{Y}\sim F_\vec{Y}(
 \item[Score function]
 The score function is $s=\frac{\partial l(\theta;y)}{\partial\theta}$.
 
+\hide{
 As defined, the score function depends on both $\theta$ and on $\vec y$. In some applications, such as when finding the MLE, we fix $y$ and look at $s(\theta;y)$ as a function of $\theta$.  
 
-In other applications,it turns out to be useful to fix $\theta$ at its true value $\theta^*$ and look at the random variables $(\theta^*;Y)$. In still other applications, we are interested in some specific hypothesized parameter $\theta_0$and we look at the statistics $(\theta_0;Y)$ (note that $s(\theta^*;Y)$ is \textit{not} a statistic since $\theta^*$ is unknown).
+In other applications,it turns out to be useful to fix $\theta$ at its true value $\theta^*$ and look at the random variables $(\theta^*;Y)$. In still other applications, we are interested in some specific hypothesized parameter $\theta_0$and we look at the statistics $(\theta_0;Y)$ (note that $s(\theta^*;Y)$ is \textit{not} a statistic since $\theta^*$ is unknown).}
 
 We have that:
 \begin{align*}
@@ -816,6 +828,7 @@ If $Y$ is in NEF form (e.g. Normal ($\sigma^2$ known), Poisson, Binomial (n fixe
 
 \subsection{MLEs \& Fisher Informations}
 \begin{itemize}
+    \itemsep0em
     \item Bernoulli: $\hat p = \bar Y$. $I_1(p) = \frac{1}{pq}$
     \item Binomial: $\hat p = \frac{y}{n}$. $I_n(p) = \frac{n}{pq}$
     \item Geometric: $\hat p = n/\sum y_i$. $I_n(p) = n(\frac{1}{p^2} + \frac{1}{pq})$
